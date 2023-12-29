@@ -1,16 +1,35 @@
 import json
 import requests
 
-#urls = ["http://192.168.0.36/solar_api/v1/GetPowerFlowRealtimeData.fcgi"]
-def Get_Fronius_Data(urls):
-
+def Get_Fronius_Data(urls, searchKeys):
+    values = []
     for url in urls:
-        apiResponse = requests.get(url)
-        apiResponseJson = json.loads(str(apiResponse.text))
+        try:
+            apiResponse = requests.get(url, timeout=5)
+            apiResponseJson = json.loads(str(apiResponse.text))
 
-        #Grab apropriate value
-        ActualPower = apiResponseJson["Body"]["Data"]["Inverters"]["1"]["P"]
-        DayPower = apiResponseJson["Body"]["Data"]["Inverters"]["1"]["E_Day"]
+            #Grab apropriate value
+            if isinstance(searchKeys, list):
+                for sk in searchKeys:
+                    values.append(Get_Values_From_Response(sk, apiResponseJson))
+            else:
+                values.append(Get_Values_From_Response(searchKeys, apiResponseJson))
 
-        return ActualPower, DayPower
-        #print(DayPower, ActualPower)
+            #ActualPower = apiResponseJson["Body"]["Data"]["Inverters"]["1"]["P"]
+            #DayPower = apiResponseJson["Body"]["Data"]["Inverters"]["1"]["E_Day"]
+
+            return values
+        except requests.exceptions.Timeout:
+            print("Wechselrichter: ", url, "ist offline")
+            
+def Get_Values_From_Response(searchKeys, inputDic):
+    if searchKeys in inputDic:
+        return inputDic[searchKeys]
+
+    for v in inputDic.values():
+        if isinstance(v, dict):
+            found = Get_Values_From_Response(searchKeys, v)
+            if found is not None:
+                return found
+    return None
+
