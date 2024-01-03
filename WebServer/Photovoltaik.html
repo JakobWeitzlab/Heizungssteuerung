@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Photovoltaik</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="photovoltaik.css">
+    </head>
+    <body>
+        <div class="flex-wrapper-header">
+            <h1>Photovoltaik</h1>
+        </div>
+
+        
+        
+        <div class="flex-wrapper-main">
+
+            <div class="dataContainer">
+                <div class="dataSelect">
+                    <label><input name="dataSelected" type="checkbox" value="E_Day">Produktion_Tag</label>
+                    <label><input name="dataSelected" type="checkbox" value="P">Produktion_Jetzt</label>
+                    <label><input name="dataSelected" type="checkbox" value="">Platzhalter</label>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="source">Weitzlab1</div>
+                    <div class="data">
+                        <div class="status">Status:</div>
+                        <div class="produktionTag">Produktion_Tag:</div>
+                        <div class="produktionJetzt">Produktion_Jetzt:</div>
+                    </div>
+                </div>
+
+                <div class="data-wrapper">
+                    <div class="source">Voit</div>
+                    <div class="data">
+                        <div class="status" id="">Status:</div>
+                        <div class="produktionTag" id="">Produktion_Tag:</div>
+                        <div class="produktionJetzt" id="">Produktion_Jetzt:</div>
+                    </div>
+                </div>
+                
+                <div class="data-wrapper">
+                    <div class="source">Weitzlab2</div>
+                    <div class="data">
+                        <div class="status">Status:</div>
+                        <div class="produktionTag">Produktion_Tag:</div>
+                        <div class="produktionJetzt">Produktion_Jetzt:</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+
+        <div id="displaySelectedProperties">
+            
+        </div>
+        <script src="js/websocket.js" async defer></script>
+        <script src="js/script.js" defer ></script>
+    </body>
+</html>
